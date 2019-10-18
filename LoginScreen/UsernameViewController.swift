@@ -27,6 +27,7 @@ class UsernameViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         addUsernameLabel()
+        addNavButton()
     }
     
     func addUsernameLabel() {
@@ -51,7 +52,7 @@ class UsernameViewController: UIViewController {
     }
     
     func addNavButton() {
-        navButton.setTitle("Navigate", for .normal)
+        navButton.setTitle("Amulya", for: .normal)
         navButton.setTitleColor (.white, for: .normal)
         navButton.backgroundColor = .blue
         
@@ -75,7 +76,12 @@ class UsernameViewController: UIViewController {
     @objc
     func navButtonPressed() {
         print("Button Pressed")
+        self.navigationController?.popViewController(animated: true)
+        // pop is remove
+        // push is add 
     }
+    
+    
 }
 
 

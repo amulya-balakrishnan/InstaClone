@@ -10,6 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let passWordField = UITextField()
+    let userNameField = UITextField()
+    let logoView = UIImageView()
+    let loginButton = UIButton(type: .system) // do .system for now because it is one of the default types (comes w/ a lot of things like animations, etc.)
+    
     override func viewDidLoad() { // every view controller has diff states. this gets run every time view gets loaded for the first time
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -24,6 +29,8 @@ class ViewController: UIViewController {
         
         // Add login button
         addLoginButton()
+        
+        
         
     }
     
@@ -83,7 +90,6 @@ class ViewController: UIViewController {
     
     func addUserNameField() {
         // create text field
-        let userNameField = UITextField()
         
         // set properties
         userNameField.placeholder = "Username"
@@ -108,12 +114,12 @@ class ViewController: UIViewController {
     
     func addPassWordField() {
         // create text field
-        let passWordField = UITextField()
         
         // set properties
         passWordField.placeholder = "Password"
         passWordField.delegate = self // delegates to ViewController
         passWordField.textAlignment = .center
+        passWordField.isSecureTextEntry = true // lets you enter dots
         
         view.addSubview(passWordField)
         
@@ -131,11 +137,15 @@ class ViewController: UIViewController {
     }
     
     func addLoginButton() {
-        let loginButton = UIButton(type: .system) // do .system for now because it is one of the default types (comes w/ a lot of things like animations, etc.)
+        
         
         // set properties for button
         loginButton.setTitle("Login", for: .normal)
-        loginButton.setTitleColor(.blue, for: .normal)
+        loginButton.setTitleColor(.white, for: .normal)
+        loginButton.backgroundColor = .blue
+        
+        // target = what is this button actually targeting?, every time the button is clicked the function will be called, the last thing is an enum that is referring to things the button can do
+        loginButton.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
         
         view.addSubview(loginButton)
         
@@ -152,8 +162,36 @@ class ViewController: UIViewController {
         rightConstraint.isActive = true
     }
 
+    @objc
+    func loginButtonPressed() {
+        print("Button Pressed")
+    
+        // if username field is not empty, username is whatever is in the username text field
+        // if password field is not empty, password is whatever is in the password field
+        if let username: String = userNameField.text , let password = passWordField.text {
+            print(username) // prints out username to console after you press the button
+            
+            if let username = userNameField.text ,
+                let password = passWordField.text {
+                if (!username.isEmpty && !password.isEmpty) {
+                    print(username)
+                    
+                    // create a new instance of the class
+                    let usernameViewController = UsernameViewController(username: username)
+                    
+                    self.navigationController?.pushViewController(usernameViewController, animated: true)
+                    
+                } else {
+                    print("Not Entered")
+                }
+            }
+        }
+        
+       
+    }
 
 }
+
 
 extension ViewController: UITextFieldDelegate { // advantage of extensions is that it's clean so you can modularize your code
     // every time user presses return key, this function should get called

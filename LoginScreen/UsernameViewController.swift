@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class UsernameViewController: UIViewController {
+class ProfileViewController: UIViewController {
     var username: String?
     let usernameLabel: UILabel = UILabel() 
     let navButton = UIButton(type: .system)
@@ -35,6 +35,7 @@ class UsernameViewController: UIViewController {
         if let username = self.username {
             usernameLabel.text = username
         }
+        
         
         view.addSubview(usernameLabel)
         

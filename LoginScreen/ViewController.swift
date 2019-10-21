@@ -165,28 +165,16 @@ class ViewController: UIViewController {
     @objc
     func loginButtonPressed() {
         print("Button Pressed")
-    
-        // if username field is not empty, username is whatever is in the username text field
-        // if password field is not empty, password is whatever is in the password field
-        if let username: String = userNameField.text , let password = passWordField.text {
-            print(username) // prints out username to console after you press the button
+        
+        if let userName = userNameField.text, let password = passWordField.text {
             
-            if let username = userNameField.text ,
-                let password = passWordField.text {
-                if (!username.isEmpty && !password.isEmpty) {
-                    print(username)
-                    
-                    // create a new instance of the class
-                    let usernameViewController = UsernameViewController(username: username)
-                    
-                    self.navigationController?.pushViewController(usernameViewController, animated: true)
-                    
-                } else {
-                    print("Not Entered")
-                }
+            if !userName.isEmpty && !password.isEmpty {
+                let profileViewController = ProfileViewController(username: userName)
+                self.navigationController?.pushViewController(profileViewController, animated: true)
+            } else {
+                print("username or password are empty")
             }
         }
-        
        
     }
 
